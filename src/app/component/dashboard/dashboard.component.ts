@@ -8,16 +8,16 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  id!: string;
-  x! : string;
+  id = "";
 
   constructor(private router: Router, private authService: AuthService){}
 
   ngOnInit(){
-    localStorage.getItem('token');
+    this.id = localStorage.getItem('token') || "";
+    // this.id = JSON.parse(localStorage.getItem('token') || '{}');
 
   }
-  
+
   logout() {
     console.log('logout');
     this.authService.logout();

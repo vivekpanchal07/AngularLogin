@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth } from '../interface/auth';
+import { IAuth } from '../interface/auth';
 @Injectable({
   providedIn: 'root'
 })

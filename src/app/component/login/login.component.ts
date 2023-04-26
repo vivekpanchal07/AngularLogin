@@ -1,22 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
-import { Auth } from 'src/app/interface/auth';
+import { IAuth } from 'src/app/interface/auth';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  model: Auth = {
+  model: IAuth = {
     userid: 'admin',
     password: 'root',
   };
 
   loginForm!: FormGroup;
-  message!: string;
+  message?: string;
   returnUrl!: string;
+  submitted= false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,12 +34,11 @@ export class LoginComponent implements OnInit {
     this.authService.logout();
   }
 
-  get f() {
+  get f(): { [key: string]: AbstractControl } {
     return this.loginForm.controls;
   }
 
   login() {
-    console.log("dd ")
     if (this.loginForm.invalid) {
       return;
     } else {
